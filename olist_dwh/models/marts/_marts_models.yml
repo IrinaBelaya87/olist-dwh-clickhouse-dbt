@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: mart_revenue_monthly
+    description: >
+      grain: 1 строка = 1 месяц покупки. Только доставленные заказы (order_status = 'delivered').
+      Выручка = заказы × средний чек; заказы = покупатели × заказов на покупателя;
+      средний чек = товаров в заказе × средняя цена товара. Выручка считается по price без freight_value.
+    columns:
+      - name: month
+        data_tests:
+          - unique
+          - not_null
+      - name: orders
+        data_tests:
+          - not_null
+      - name: revenue
+        data_tests:
+          - not_null

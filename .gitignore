@@ -1,0 +1,9 @@
+﻿.venv/
+data/
+logs/
+olist_dwh/target/
+olist_dwh/logs/
+olist_dwh/dbt_packages/
+__pycache__/
+*.pyc
+.env

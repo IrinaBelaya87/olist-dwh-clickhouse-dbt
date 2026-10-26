@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "grain: 1 строка = 1 заказ. Суммы по позициям и платежам приведены к уровню заказа до соединения."
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+  - name: dim_products
+    description: "grain: 1 строка = 1 товар (product_id). Категория на английском; товары без категории и категории без перевода помечены unknown."
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+      - name: product_category_en
+        data_tests:
+          - not_null
+
+  - name: dim_customers
+    description: "grain: 1 строка = 1 человек (customer_unique_id). Город и штат взяты из последнего заказа."
+    columns:
+      - name: customer_unique_id
+        data_tests:
+          - unique
+          - not_null
+      - name: orders_count
+        data_tests:
+          - not_null

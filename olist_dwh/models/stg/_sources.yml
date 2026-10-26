@@ -1,0 +1,22 @@
+version: 2
+
+# Источники: таблицы слоя raw (загружены sql/01_raw.sql).
+# В dbt-clickhouse schema = база данных ClickHouse.
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: orders
+        description: Заказы (1 строка = заказ)
+      - name: order_items
+        description: Позиции заказов (1 строка = товар в заказе)
+      - name: order_payments
+        description: Платежи (1 строка = платёж; на заказ может быть несколько)
+      - name: customers
+        description: Покупатели (customer_id выдаётся на каждый заказ, customer_unique_id = человек)
+      - name: sellers
+        description: Продавцы
+      - name: products
+        description: Товары
+      - name: product_category_name_translation
+        description: Перевод названий категорий на английский
